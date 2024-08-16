@@ -1,9 +1,11 @@
-function App() {
+import Login from "./features/user/login";
+
+const App = () => {
   return (
     <>
-      <p>Hello World</p>
+      <Login />
     </>
   );
-}
+};
 
 export default App;
