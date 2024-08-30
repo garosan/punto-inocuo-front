@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { signOut } from "firebase/auth";
-import { auth } from "./firebaseConfig";
+import { auth } from "./services/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
