@@ -11,20 +11,33 @@ import {
 import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { collection, addDoc, getFirestore } from "firebase/firestore"; // Firestore methods
 
 const NewAudit = () => {
+  const db = getFirestore();
   const [time, setTime] = useState(dayjs()); // Default to current time
   const [restaurantName, setRestaurantName] = useState("");
   const [auditor, setAuditor] = useState("");
   const [managerName, setManagerName] = useState("");
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
-  const handleStartAudit = () => {
-    console.log("Audit started with data:", {
-      time,
-      restaurantName,
-      auditor,
-      managerName,
-    });
+  const handleStartAudit = async () => {
+    try {
+      // Create a new document in Firestore
+      const docRef = await addDoc(collection(db, "audits"), {
+        time: time.format("HH:mm"),
+        restaurantName,
+        auditor,
+        managerName,
+        createdAt: new Date(),
+      });
+
+      // Redirect to the new audit page
+      navigate(`/audits/${docRef.id}`);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
   };
 
   return (
