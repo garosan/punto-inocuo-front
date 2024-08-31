@@ -15,10 +15,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       open={isOpen}
       onClose={toggleSidebar}
       sx={{
-        width: isDesktop ? 240 : 0,
+        width: 240,
         flexShrink: 0,
-        [`& .MuiDrawer-paper`]: { width: 240, boxSizing: "border-box" },
-        display: { xs: "block", md: "flex" },
+        "& .MuiDrawer-paper": {
+          width: 240,
+          boxSizing: "border-box",
+          mt: 8,
+          height: `calc(100vh - 64px)`,
+        },
       }}
     >
       <List>

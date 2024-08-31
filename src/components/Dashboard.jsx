@@ -1,36 +1,37 @@
 import { useState } from "react";
-import { Button } from "@mui/material";
-import { signOut } from "firebase/auth";
-import { auth } from "../services/firebaseConfig";
-import { useNavigate } from "react-router-dom";
-
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import MainContent from "./MainContent";
 import Box from "@mui/material/Box";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const handleLogout = async () => {
-    await signOut(auth);
-    navigate("/login");
-  };
-
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <Navbar toggleSidebar={toggleSidebar} />
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <MainContent>
-        <Button onClick={handleLogout} variant="contained" color="secondary">
-          Logout
-        </Button>
-      </MainContent>
+      <Box sx={{ display: "flex", flex: 1, mt: 1 }}>
+        <Sidebar
+          isOpen={isSidebarOpen || isDesktop}
+          toggleSidebar={toggleSidebar}
+        />
+        <Box
+          component="div"
+          sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
+        >
+          <MainContent>
+            <h1>Dashboard</h1>
+          </MainContent>
+        </Box>
+      </Box>
     </Box>
   );
 };
