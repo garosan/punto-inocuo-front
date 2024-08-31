@@ -7,6 +7,9 @@ import {
 import Login from "./Login";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
+import NewAudit from "./pages/NewAudit";
+import Audits from "./pages/Audits";
+import Layout from "./components/Layout";
 
 const App = () => {
   return (
@@ -18,7 +21,29 @@ const App = () => {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <Layout>
+                <Dashboard />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/audits/new"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <NewAudit />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/audits"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Audits />
+              </Layout>
             </ProtectedRoute>
           }
         />

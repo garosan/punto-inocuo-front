@@ -4,6 +4,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const theme = useTheme();
@@ -26,11 +27,17 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       }}
     >
       <List>
-        {["Option 1", "Option 2", "Option 3"].map((text, index) => (
-          <ListItem button key={index}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem
+          button
+          component={Link}
+          to="/audits/new"
+          onClick={toggleSidebar}
+        >
+          <ListItemText primary="Nueva Auditoría" />
+        </ListItem>
+        <ListItem button component={Link} to="/audits" onClick={toggleSidebar}>
+          <ListItemText primary="Ver Auditorías" />
+        </ListItem>
       </List>
     </Drawer>
   );
