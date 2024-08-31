@@ -5,7 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Login from "./Login";
-import Dashboard from "./Dashboard"; // Create this component later
+import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 
 const App = () => {
