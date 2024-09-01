@@ -9,6 +9,7 @@ import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 import NewAudit from "./pages/NewAudit";
 import Audits from "./pages/Audits";
+import AuditFormulaire from "./pages/AuditFormulaire";
 import Layout from "./components/Layout";
 
 const App = () => {
@@ -47,7 +48,16 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        {/* Add more protected routes as needed */}
+        <Route
+          path="/audits/:id"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <AuditFormulaire />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
